@@ -22,4 +22,4 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
 external:
   merchant:
-    host: http://localhost:${wiremock.server.port}
+    host: http://localhost.com.br:${wiremock.server.port}

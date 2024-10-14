@@ -17,7 +17,7 @@ class ExceptionHandler {
     @ExceptionHandler(Exception::class)
     fun handleException(exception: Exception) =
         logAndBuildResponse(
-            message = exception.localizedMessage,
+            message = exception.message ?: exception.localizedMessage,
             payload = TransactionResponse(ERROR.code)
         )
 

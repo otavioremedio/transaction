@@ -19,8 +19,8 @@ class MerchantMock {
 
     fun configSuccess(
         responseHttpHeaders: List<HttpHeader> = listOf(HttpHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)),
-        name: String,
-        mcc: String
+        name: String = "UBER TRIP                   SAO PAULO BR",
+        mcc: String = "5835"
     ) {
         stubFor(
             get(urlEqualTo(URL_MERCHANT.format(UriUtils.encode(name, "UTF-8"))))

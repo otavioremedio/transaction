@@ -1,7 +1,6 @@
 package caju.transaction.facade
 
 import caju.transaction.context.TransactionCreateContext
-import caju.transaction.enum.TransactionStatusEnum.APPROVED
 import caju.transaction.enum.TransactionTypeEnum
 import caju.transaction.mapper.TransactionMapper
 import caju.transaction.rest.request.TransactionRequest
@@ -24,7 +23,7 @@ class TransactionCreateFacade(private val transactionService: TransactionService
             .let(::createTransaction)
             .let(::doCharge)
             .let(::saveAccount)
-            .let{ TransactionResponse(APPROVED.code) }
+            .let{ TransactionMapper.toResponse(it.account!!) }
 
     }
 
