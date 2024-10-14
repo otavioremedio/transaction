@@ -2,6 +2,7 @@ package caju.transaction.constants
 
 object URLConstants {
     const val URL_TRANSACTION = "/transactions"
+    const val URL_MERCHANT = "/merchants"
 }
 
 object Logs {

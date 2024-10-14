@@ -1,9 +1,10 @@
 package caju.transaction.integration
 
+import caju.transaction.constants.URLConstants.URL_MERCHANT
 import caju.transaction.integration.response.MerchantResponse
+import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.cloud.openfeign.FeignClient
 
 @FeignClient(
     value = "merchantClient",
@@ -11,8 +12,8 @@ import org.springframework.cloud.openfeign.FeignClient
 )
 interface MerchantClient {
 
-    @GetMapping(value = ["/merchants"])
-    fun getMerchant (
+    @GetMapping(value = [URL_MERCHANT])
+    fun findMerchant (
         @RequestParam("name") name: String,
     ) : MerchantResponse
 }

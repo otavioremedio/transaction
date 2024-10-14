@@ -1,6 +1,5 @@
 package caju.transaction.exception
 
-import caju.transaction.enum.TransactionStatusEnum.DENIED
 import caju.transaction.enum.TransactionStatusEnum.ERROR
 import caju.transaction.rest.response.TransactionResponse
 import caju.transaction.transaction.logger.loggerError
@@ -20,13 +19,6 @@ class ExceptionHandler {
         logAndBuildResponse(
             message = exception.localizedMessage,
             payload = TransactionResponse(ERROR.code)
-        )
-
-    @ExceptionHandler(BalanceException::class)
-    fun handleBalanceException(exception: BalanceException) =
-        logAndBuildResponse(
-            message = exception.localizedMessage,
-            payload = TransactionResponse(DENIED.code)
         )
 
     private fun logAndBuildResponse(message: String, payload: TransactionResponse) =

@@ -1,0 +1,15 @@
+server:
+  port: ${PORT:8093}
+
+spring:
+  application:
+    name: caju-transaction
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write_dates_as_timestamps: false
+    property-naming-strategy: SNAKE_CASE
+  messages:
+    always-use-message-format: true
+    basename: i18n/messages
+    encoding: UTF-8

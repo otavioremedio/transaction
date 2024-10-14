@@ -3,11 +3,11 @@ package caju.transaction.transaction.rest
 import caju.transaction.constants.Logs.MERCHANT
 import caju.transaction.constants.URLConstants.URL_TRANSACTION
 import caju.transaction.facade.TransactionCreateFacade
+import caju.transaction.rest.request.TransactionRequest
 import caju.transaction.rest.response.TransactionResponse
 import caju.transaction.transaction.logger.Kv
 import caju.transaction.transaction.logger.loggerInfo
 import caju.transaction.transaction.logger.toJson
-import caju.transaction.transaction.rest.request.transactionRequest
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.slf4j.Logger
@@ -35,7 +35,7 @@ class TransactionController(
     fun create(
         @RequestBody
         @Valid
-        transactionRequest: transactionRequest,
+        transactionRequest: TransactionRequest,
         request: HttpServletRequest
     ) : TransactionResponse {
 

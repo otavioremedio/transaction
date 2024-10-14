@@ -3,24 +3,28 @@ package caju.transaction.facade
 import caju.transaction.context.TransactionCreateContext
 import caju.transaction.enum.TransactionStatusEnum.APPROVED
 import caju.transaction.enum.TransactionTypeEnum
+import caju.transaction.mapper.TransactionMapper
+import caju.transaction.rest.request.TransactionRequest
 import caju.transaction.rest.response.TransactionResponse
 import caju.transaction.service.TransactionService
-import caju.transaction.transaction.rest.request.transactionRequest
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
 @Service
-class TransactionCreateFacade(
-        private val transactionService: TransactionService,
-) : AbstractFacade() {
+class TransactionCreateFacade(private val transactionService: TransactionService) : AbstractFacade() {
 
-    fun create(transactionRequest: transactionRequest
+    @Transactional
+    fun create(
+        transactionRequest: TransactionRequest
     ): TransactionResponse {
         return TransactionCreateContext(transactionRequest = transactionRequest)
-            .let {::findMerchant}
-            .let {::findAccount}
-            .let {::findTransactionType}
-            .let {::doCharge}
-            .let { TransactionResponse(APPROVED.code)}
+            .let(::findMerchant)
+            .let(::findAccount)
+            .let(::findTransactionType)
+            .let(::createTransaction)
+            .let(::doCharge)
+            .let(::saveAccount)
+            .let{ TransactionResponse(APPROVED.code) }
 
     }
 
@@ -45,10 +49,24 @@ class TransactionCreateFacade(
                 .let(context::addTransactionType)
         }
 
+    private fun createTransaction(context: TransactionCreateContext) =
+        TransactionMapper.toEntity(
+            context.transactionRequest.totalAmount,
+            context.transactionType!!,
+            context.account!!
+        ).let(context::addTransaction)
+
     private fun doCharge(context: TransactionCreateContext) =
         executeAndLog {
             transactionService
-                .doCharge(context.account!!, context.transactionType!!, context.transactionRequest.totalAmount)
+                .doCharge(context.account!!, context.transaction!!)
+                .let(context::addAccount)
+        }
+
+    private fun saveAccount(context: TransactionCreateContext) =
+        executeAndLog {
+            transactionService
+                .save(context.account!!)
                 .let(context::addAccount)
         }
 

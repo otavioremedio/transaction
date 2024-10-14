@@ -1,9 +1,9 @@
-package caju.transaction.transaction.rest.request
+package caju.transaction.rest.request
 
 import caju.transaction.constants.Regex.ONLY_NUMBERS
 import jakarta.validation.constraints.Pattern
 
-data class transactionRequest(
+data class TransactionRequest(
     val account: String,
     @field:Pattern(regexp= ONLY_NUMBERS)
     val mcc: String,
