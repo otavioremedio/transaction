@@ -20,5 +20,6 @@ curl --location 'http://localhost:8093/transactions' \
 
 Para o ponto 4, penso que iria utilizar um cache pra armazenar a conta da transação até o momento em que se encerra o fluxo, essa verificação poderia ficar num método recursivo por um limite de tempo, verificando se a conta ja foi removida do cache, para então adicionar novamente e prosseguir com a nova cobrança.
 
-![image](https://github.com/user-attachments/assets/6990bfba-5cd6-4e4c-8041-0f1837c556be)
+![image](https://github.com/user-attachments/assets/71e9e72b-7b8a-4ac0-91b5-ecd226db0c08)
+
 
