@@ -13,6 +13,7 @@ import caju.transaction.enum.TransactionStatusEnum.DENIED
 import caju.transaction.enum.TransactionStatusEnum.ERROR
 import caju.transaction.enum.TransactionTypeEnum.FOOD
 import caju.transaction.enum.TransactionTypeEnum.MEAL
+import caju.transaction.exception.ErrorResponse
 import caju.transaction.rest.request.TransactionRequest
 import caju.transaction.rest.response.TransactionResponse
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -37,6 +38,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 import org.mockito.Mockito.`when`
+import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.OK
 
 
@@ -239,6 +241,25 @@ class CreateTransactionTest : AbstractComponent() {
         } Extract {
             with(`as`(TransactionResponse::class.java)) {
                 assertThat(code).isEqualTo(ERROR.code)
+            }
+        }
+    }
+
+    @Test
+    fun `Deve retornar erro com mcc no formato invalido`(){
+        GivenByAsn {
+            givenDefault()
+                .body(buildRequest(mcc = "ABCD"))
+        } When {
+            post(URL_TRANSACTION)
+        } Then {
+            assertThatStatusCodeIsEqualTo(BAD_REQUEST)
+            inOrder.verifyNoMoreInteractions()
+        } Extract {
+            with(`as`(ErrorResponse::class.java)) {
+                assertThat(field).isEqualTo("mcc")
+                assertThat(message).isEqualTo("It needs to be a numeric value.")
+                assertThat(error).isEqualTo("invalid_parameter")
             }
         }
     }

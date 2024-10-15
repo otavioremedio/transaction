@@ -13,3 +13,7 @@ object Logs {
 object Regex {
     const val ONLY_NUMBERS = "^[0-9]*\$"
 }
+
+object Errors{
+    const val INVALID_PARAMETER = "invalid_parameter"
+}

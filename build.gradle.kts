@@ -30,12 +30,12 @@ dependencies {
 	implementation("net.logstash.logback:logstash-logback-encoder:7.2")
 	implementation("org.apache.logging.log4j:log4j-api:2.17.2")
 	implementation("org.apache.logging.log4j:log4j-to-slf4j:2.17.2")
+	implementation("com.h2database:h2:2.1.214")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.springframework.cloud:spring-cloud-contract-wiremock:4.1.4")
-	testImplementation("com.h2database:h2:2.1.214")
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 	testImplementation("io.rest-assured:rest-assured:${property("restAssuredVersion")}")
 	testImplementation("io.rest-assured:json-path:${property("restAssuredVersion")}")

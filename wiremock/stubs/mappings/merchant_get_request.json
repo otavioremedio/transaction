@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/merchants\\?name=([a-zA-Z0-9-%]*)",
+    "queryParameters": {
+      "name": {
+        "matches": "^([a-zA-Z0-9- ]*)$"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "merchant_get_response.json",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "transformers": [
+      "response-template"
+    ]
+  }
+}

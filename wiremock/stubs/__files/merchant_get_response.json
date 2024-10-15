@@ -1,0 +1,4 @@
+{
+  "name":"{{request.query.name}}",
+  "mcc": "{{pickRandom '5411' '5412' '5811' '5812' '5813'}}"
+}

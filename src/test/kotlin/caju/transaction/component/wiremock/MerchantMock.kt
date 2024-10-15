@@ -36,7 +36,6 @@ class MerchantMock {
 
     private fun buildBody(name: String, mcc: String) =
         MerchantResponse(
-            id = 1,
             name = name,
             mcc = mcc
         ).let {

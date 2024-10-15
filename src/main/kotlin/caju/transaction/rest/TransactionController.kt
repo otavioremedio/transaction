@@ -1,4 +1,4 @@
-package caju.transaction.transaction.rest
+package caju.transaction.rest
 
 import caju.transaction.constants.Logs.MERCHANT
 import caju.transaction.constants.URLConstants.URL_TRANSACTION

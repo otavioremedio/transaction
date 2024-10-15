@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  wiremock:
+    container_name: wiremock
+    hostname: wiremock
+    image: rodolpheche/wiremock:latest-alpine
+    ports:
+      - 8080:8080
+    volumes:
+      - ./stubs:/home/wiremock
+    command:
+      - -verbose
+      - -global-response-templating
+    networks:
+      - default_network
+
+networks:
+  default_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 144.0.0.0/16
